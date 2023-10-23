@@ -10,7 +10,7 @@
 // ==/UserScript==
 
 (function () {
-  ("use strict");
+  "use strict";
 
   function removeOrEditBadElements(element) {
     /** @type {HTMLElement[]} */
@@ -23,11 +23,13 @@
         content.trim() == "اقتراحات قد تعجبك" ||
         content.trim() == "ريلز ومقاطع الفيديو القصيرة"
       ) {
-        elm.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.style.display =
-          "none";
+        elm.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.style.opacity = 0;
+        elm.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.style.border =
+          "1px solid red";
       } else if (content.trim() == "مُموَّل") {
-        elm.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.style.display =
-          "none";
+        elm.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.style.opacity = 0;
+        elm.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.style.border =
+          "1px solid red";
       }
 
       /** @type {HTMLVideoElement[]} */
