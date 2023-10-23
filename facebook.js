@@ -12,8 +12,11 @@
 (function () {
   ("use strict");
 
-  function removeFBSggestions(element) {
-    element.querySelectorAll("span").forEach((elm) => {
+  function removeOrEditBadElements(element) {
+    /** @type {HTMLElement[]} */
+    const elements = element.querySelectorAll("span");
+
+    elements.forEach((elm) => {
       const content = elm.textContent;
 
       if (
@@ -26,6 +29,38 @@
         elm.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.style.display =
           "none";
       }
+
+      /** @type {HTMLVideoElement[]} */
+      const videoElements = element.querySelectorAll("video");
+
+      videoElements.forEach((elm) => {
+        elm.style.filter = "blur(99px)";
+
+        elm.addEventListener("play", () => {
+          elm.style.filter = "blur(0px)";
+        });
+
+        elm.addEventListener("pause", () => {
+          elm.style.filter = "blur(99px)";
+        });
+      });
+
+      /** @type {HTMLImageElement[]} */
+      const imageElements = element.querySelectorAll("img");
+
+      imageElements.forEach((elm) => {
+        if (elm.parentElement.tagName === "DIV") {
+          elm.style.filter = "blur(99px)";
+
+          elm.addEventListener("mouseover", () => {
+            elm.style.filter = "blur(0px)";
+          });
+
+          elm.addEventListener("mouseout", () => {
+            elm.style.filter = "blur(99px)";
+          });
+        }
+      });
     });
   }
 
@@ -34,14 +69,14 @@
       if (mutation.addedNodes.length > 0) {
         mutation.addedNodes.forEach((addedNode) => {
           if (addedNode.nodeType === Node.ELEMENT_NODE) {
-            removeFBSggestions(addedNode);
+            removeOrEditBadElements(addedNode);
           }
         });
       }
     });
   }
 
-  removeFBSggestions(document);
+  removeOrEditBadElements(document);
 
   const observer = new MutationObserver(observeMutations);
   observer.observe(document, { childList: true, subtree: true });
