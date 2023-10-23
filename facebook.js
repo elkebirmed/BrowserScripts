@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         FBSGRM
+// @name         Facebook RM
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  Remove Facebook suggestions
+// @description  Remove Facebook suggestions & Ads
 // @author       Mohamed Elkebir
 // @match        https://www.facebook.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=facebook.com
